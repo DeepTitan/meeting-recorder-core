@@ -1,0 +1,23 @@
+meeting-recorder-core
+======================
+
+This project is a derivative work of Hyprnote ("char") by Fastrepl Inc.
+Upstream: https://github.com/fastrepl/char
+License:  GPL-3.0-or-later (same as upstream)
+
+We include portions of the Hyprnote workspace — primarily the audio
+capture, resampling, chunking, speech-to-text streaming, and listener
+plumbing crates — and adapt them into a standalone library intended to
+be consumed as a Cargo path / git dependency by downstream desktop apps.
+
+Per GPL-3, any binary linking against this crate must itself be
+licensed under GPL-3-compatible terms. Quantum's web app (Next.js,
+private repository) does not link against any code in this repo and is
+therefore not affected.
+
+See LICENSE for the full text of the GNU General Public License v3.
+
+Third-party runtime dependency:
+  Cactus (cactus-sys) — https://github.com/cactus-compute/cactus
+  Used for on-device streaming speech-to-text on Apple Silicon. License
+  terms are set by Cactus Compute and are independent from this project.
