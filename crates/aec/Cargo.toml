@@ -1,0 +1,25 @@
+[package]
+name = "aec"
+version = "0.1.0"
+edition = "2024"
+
+# The upstream Hyprnote crate exposes an `onnx` feature that depends on a
+# hypr-onnx wrapper we haven't copied (requires bundling ONNX Runtime).
+# We strip that feature here — only the FFT-based building blocks remain.
+
+[features]
+default = ["128"]
+128 = []
+256 = []
+512 = []
+
+[dependencies]
+realfft = { workspace = true }
+
+serde = { workspace = true }
+thiserror = { workspace = true }
+
+[dev-dependencies]
+dasp = { workspace = true }
+hound = { workspace = true }
+rodio = { workspace = true }

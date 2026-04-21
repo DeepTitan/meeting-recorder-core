@@ -1,0 +1,43 @@
+[package]
+name = "audio-actual"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+hypr-aec = { workspace = true }
+hypr-audio = { workspace = true }
+hypr-audio-interface = { workspace = true }
+hypr-audio-sync = { workspace = true }
+hypr-audio-utils = { workspace = true }
+hypr-resampler = { workspace = true }
+
+anyhow = { workspace = true }
+thiserror = { workspace = true }
+tracing = { workspace = true }
+
+bytes = { workspace = true }
+serde = { workspace = true, features = ["derive"] }
+serde_json = { workspace = true }
+
+futures-channel = { workspace = true }
+futures-util = { workspace = true }
+pin-project = { workspace = true }
+tokio = { workspace = true, features = ["rt", "macros", "sync", "time"] }
+tokio-stream = { workspace = true }
+tokio-util = { workspace = true }
+
+cpal = { workspace = true }
+dasp = { workspace = true }
+rodio = { workspace = true }
+
+ebur128 = "0.1.10"
+ringbuf = { workspace = true }
+
+[target.'cfg(target_os = "macos")'.dependencies]
+cidre = { workspace = true, features = ["av"] }
+
+[dev-dependencies]
+futures-util = { workspace = true }
+hound = { workspace = true }
+rodio = { workspace = true }
+tokio = { workspace = true, features = ["rt", "macros", "time", "sync"] }

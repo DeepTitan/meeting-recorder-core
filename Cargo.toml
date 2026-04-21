@@ -1,7 +1,9 @@
 [workspace]
 resolver = "2"
 members = [
+    "crates/aec",
     "crates/audio",
+    "crates/audio-actual",
     "crates/audio-interface",
     "crates/audio-mime",
     "crates/audio-sync",
@@ -16,27 +18,39 @@ repository = "https://github.com/DeepTitan/meeting-recorder-core"
 
 [workspace.dependencies]
 # Local crates — re-exported under hypr-* names so source imports from the
-# Hyprnote fork continue to work verbatim.
+# Hyprnote fork continue to work verbatim. The "aec" ref is default-features
+# disabled so we don't pull in the ONNX runtime (we don't use neural AEC).
+hypr-aec = { path = "crates/aec", package = "aec", default-features = false, features = ["128"] }
 hypr-audio = { path = "crates/audio", package = "audio" }
+hypr-audio-actual = { path = "crates/audio-actual", package = "audio-actual" }
 hypr-audio-interface = { path = "crates/audio-interface", package = "audio-interface" }
 hypr-audio-mime = { path = "crates/audio-mime", package = "audio-mime" }
 hypr-audio-sync = { path = "crates/audio-sync", package = "audio-sync" }
 hypr-audio-utils = { path = "crates/audio-utils", package = "audio-utils" }
 hypr-resampler = { path = "crates/resampler", package = "resampler" }
 
-# External, shared versions. Cribbed from the Hyprnote root workspace.
+# External, shared versions. Versions pinned to match the Hyprnote root
+# workspace so we don't accidentally pick up newer/incompatible rubato
+# or rodio APIs.
+anyhow = "1"
 approx = "0.5"
 bytes = "1.11"
+cidre = "0.15"
+cpal = "0.17"
 dasp = { version = "0.11.0", features = ["interpolate", "interpolate-linear"] }
+ebur128 = "0.1.10"
+futures-channel = "0.3.31"
 futures-util = "0.3.31"
 hound = "3.5.1"
 pin-project = "1"
 realfft = "3.5.0"
+ringbuf = "0.4.8"
 rodio = "0.22"
 serde = { version = "1", features = ["derive"] }
 serde_json = "1"
 thiserror = "2"
 tokio = { version = "1", features = ["rt", "sync", "macros"] }
 tokio-stream = "0.1.17"
+tokio-util = "0.7.15"
 tracing = "0.1"
 vorbis_rs = "0.5.5"
